@@ -8,8 +8,6 @@ type GunType string
 const (
 	GunTypeAK47 GunType = "ak47"
 	GunTypeM4A1 GunType = "m4a1"
-	// 新增类型只需添加常量，无需修改工厂核心逻辑
-	// GunTypeAWM   GunType = "awm"
 )
 
 // IGun 接口规范（方法名改为驼峰式，符合Go规范）
@@ -50,7 +48,7 @@ type gunCreator func() IGun
 // 工厂注册表，存储类型与创建函数的映射
 var gunRegistry = make(map[GunType]gunCreator)
 
-// 注册函数：将枪类型与对应的创建函数关联，供工厂调用
+// 抽象工厂方法
 func RegisterGun(gunType GunType, creator gunCreator) {
 	if creator == nil {
 		panic("factory_method: 注册的创建函数不能为nil")
